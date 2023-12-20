@@ -7,7 +7,18 @@ const db = new Database("database.db"); //El new significa que estamos creando u
 db.exec(`
   CREATE TABLE messages (
     name TEXT,
-    content TEXT
+    message TEXT
   )
 `);
 //The exec method on the database object allows us to run any SQL query against the database.
+
+const insertStatement = db.prepare(
+  `INSERT INTO messages (name, message) VALUES (?, ?)`
+);
+
+insertStatement.run("Spongebob", "Hello world");
+insertStatement.run("Patrick", "Hi Spongebob");
+insertStatement.run("Squidward", "I hate you both");
+insertStatement.run("Alberto", "Best developer ever");
+insertStatement.run("Oscar", "Just trying");
+insertStatement.run("Yorly", "Working on it");
